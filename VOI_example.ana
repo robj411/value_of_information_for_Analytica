@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ana user="rob" project="Voi_2" generated="Thu, Feb 8, 2018 12:18 PM" softwareversion="4.5.3" software="Analytica">
+ <sysvar name="Time">
+  <description>Dynamic simulation periods are specified in Time's definition. This is usually a list of numbers or labels, typically in some unit of time (days, weeks, months, etc.).  Use the ÒDynamic()Ó function in your variables to perform dynamic simulation.</description>
+ </sysvar>
+ <sysvar name="SampleSize">
+  <definition>50</definition>
+ </sysvar>
+ <sysvar name="TypeChecking">
+  <definition>1</definition>
+ </sysvar>
+ <sysvar name="Checking">
+  <definition>1</definition>
+ </sysvar>
+ <sysvar name="SaveOptions">
+  <definition>2</definition>
+ </sysvar>
+ <sysvar name="SaveValues">
+  <definition>0</definition>
+ </sysvar>
+ <sysvar name="DistSteps">
+  <definition>1</definition>
+ </sysvar>
+ <sysvar name="Sys_DomainSelfIndex">
+  <definition>1</definition>
+ </sysvar>
+ <sysvar name="Sys_AllNullTreatment">
+  <definition>1</definition>
+ </sysvar>
+ <attribute name="Reference"/>
+ <attribute name="Log">
+  <title>Log</title>
+ </attribute>
+ <askattribute name="Recursive" function="Function" enable="yes"/>
+ <askattribute name="Reference" function="Function" enable="yes"/>
+ <askattribute name="Log" function="Function" enable="yes"/>
+ <askattribute name="Reference" function="Module" enable="yes"/>
+ <askattribute name="Log" function="Module" enable="yes"/>
+ <askattribute name="Value" function="Variable" enable="yes"/>
+ <askattribute name="Check" function="Variable" enable="yes"/>
+ <askattribute name="BalloonHelp" function="Variable" enable="yes"/>
+ <askattribute name="Reference" function="Variable" enable="yes"/>
+ <askattribute name="Log" function="Variable" enable="yes"/>
+ <model name="Voi_2">
+  <title>VOI 2</title>
+  <author>jtue</author>
+  <date>11. Julta 2005 14:25</date>
+  <saveauthor>rob</saveauthor>
+  <savedate>Thu, Feb 8, 2018 12:18 PM</savedate>
+  <defaultsize>48,24</defaultsize>
+  <diagstate>2,0,2,1405,738,17</diagstate>
+  <fontstyle>Arial,15</fontstyle>
+  <fileinfo>0,Model Voi_2,2,2,0,1,Z:\home\rob\overflow_dropbox\ITHIM\analytica_files\VOI_example.ana</fileinfo>
+  <att_cleartypefonts>0</att_cleartypefonts>
+  <index name="all_parameters">
+   <title>all_parameters</title>
+   <description>A list of all parameters for which VOI is to be calculated</description>
+   <definition>[car_price,car_lifetime,lease]</definition>
+   <nodelocation>544,144,1</nodelocation>
+   <nodesize>64,16</nodesize>
+   <nodeinfo>1,1,1,1,1,1,0,0,0,0</nodeinfo>
+   <windstate>2,593,457,476,469</windstate>
+   <defnstate>2,351,356,688,342,0,MIDM</defnstate>
+   <valuestate>2,168,178,582,361,0,MIDM</valuestate>
+   <reformval>[Self,Self]</reformval>
+  </index>
+  <decision name="P_EVPPI">
+   <title>P_EVPPI</title>
+   <definition>Point_EVPPI(input,P_outcome)</definition>
+   <nodelocation>712,232,1</nodelocation>
+   <nodesize>48,24</nodesize>
+   <windstate>2,1244,369,551,531</windstate>
+   <valuestate>2,1209,145,490,385,1,MIDM</valuestate>
+   <reformval>[Undefined,Sys_LocalIndex('K'),Undefined,Undefined,Undefined,2]</reformval>
+   <att_resultslicestate>[Sys_LocalIndex('K'),4]</att_resultslicestate>
+  </decision>
+  <index name="modes">
+   <title>modes</title>
+   <description>Possible courses of action defined by model.</description>
+   <definition>['Buy car','Lease car']</definition>
+   <nodelocation>104,144,1</nodelocation>
+   <nodesize>40,16</nodesize>
+  </index>
+  <text name="Te1491991757">
+   <description>MODEL SPECIFICATION</description>
+   <nodelocation>136,44,-1</nodelocation>
+   <nodesize>96,12</nodesize>
+  </text>
+  <text name="Te1491991841">
+   <description>Model parameters</description>
+   <nodelocation>112,92,-1</nodelocation>
+   <nodesize>72,12</nodesize>
+  </text>
+  <text name="Te1491992018">
+   <description>V.O.I. CALCULATIONS</description>
+   <nodelocation>568,44,-1</nodelocation>
+   <nodesize>88,12</nodesize>
+  </text>
+  <variable name="P_outcome">
+   <title>P_outcome</title>
+   <description>The outcome of a one-dimensional function</description>
+   <definition>Sample(Function_evaluation)</definition>
+   <nodelocation>544,200,1</nodelocation>
+   <nodesize>48,24</nodesize>
+   <windstate>2,21,652,476,224</windstate>
+   <valuestate>2,472,482,416,303,0,MIDM</valuestate>
+  </variable>
+  <decision name="D_EVPPI">
+   <title>D_EVPPI</title>
+   <definition>Decision_EVPPI(input,D_outcome)</definition>
+   <nodelocation>712,312,1</nodelocation>
+   <nodesize>48,24</nodesize>
+   <windstate>2,16,6,551,531</windstate>
+   <valuestate>2,702,143,490,385,1,MIDM</valuestate>
+   <reformval>[modes,Self,Undefined,Undefined,Undefined,2]</reformval>
+   <att_resultslicestate>[all_parameters,2,Run,1,modes,2]</att_resultslicestate>
+  </decision>
+  <chance name="car_price">
+   <title>car_price</title>
+   <definition>LogNormal( median:19000, gsdev:1.5 )</definition>
+   <nodelocation>104,200,1</nodelocation>
+   <nodesize>48,24</nodesize>
+  </chance>
+  <chance name="car_lifetime">
+   <title>car_lifetime</title>
+   <definition>LogNormal( median:10, gsdev:1.2 )</definition>
+   <nodelocation>104,272,1</nodelocation>
+   <nodesize>48,24</nodesize>
+  </chance>
+  <chance name="lease">
+   <title>lease</title>
+   <definition>Uniform( 100, 300 )</definition>
+   <nodelocation>104,344,1</nodelocation>
+   <nodesize>48,24</nodesize>
+  </chance>
+  <variable name="input">
+   <title>input</title>
+   <description>All the inputs for which VOI is to be calculated</description>
+   <definition>Sample(all_parameters)</definition>
+   <nodelocation>544,272,1</nodelocation>
+   <nodesize>48,24</nodesize>
+   <windstate>2,323,54,476,224</windstate>
+   <valuestate>2,890,452,416,303,0,MIDM</valuestate>
+   <reformval>[all_parameters,Run]</reformval>
+  </variable>
+  <objective name="Decision_evaluation">
+   <title>Decision_evaluation</title>
+   <definition>var car := car_price/car_lifetime/12;
+var leasing := lease;
+
+Array(modes,[car,leasing]);</definition>
+   <nodelocation>312,344,1</nodelocation>
+   <nodesize>80,24</nodesize>
+   <windstate>2,102,90,476,224</windstate>
+   <valuestate>2,136,146,416,303,0,SAMP</valuestate>
+   <reformval>[modes,modes,Undefined,Undefined,Undefined,2]</reformval>
+  </objective>
+  <variable name="D_outcome">
+   <title>D_outcome</title>
+   <description>The outcome vector, with which a decision is made.</description>
+   <definition>Sample(Decision_evaluation)</definition>
+   <nodelocation>544,344,1</nodelocation>
+   <nodesize>48,24</nodesize>
+   <valuestate>2,632,642,416,303,0,MIDM</valuestate>
+   <reformval>[Run,modes]</reformval>
+  </variable>
+  <objective name="Function_evaluation">
+   <title>Function_evaluation</title>
+   <definition>var car := car_price/car_lifetime/12;
+car</definition>
+   <nodelocation>312,200,1</nodelocation>
+   <nodesize>80,24</nodesize>
+  </objective>
+  <text name="Te1505476380">
+   <description>Model results</description>
+   <nodelocation>296,92,-1</nodelocation>
+   <nodesize>56,12</nodesize>
+  </text>
+  <text name="Te1505476503">
+   <description>VOI parameters</description>
+   <nodelocation>544,92,-1</nodelocation>
+   <nodesize>64,12</nodesize>
+  </text>
+  <text name="Te1505476526">
+   <description>VOI results</description>
+   <nodelocation>712,92,-1</nodelocation>
+   <nodesize>56,12</nodesize>
+  </text>
+  <module name="VOI_module">
+   <title>VOI module</title>
+   <author>rob</author>
+   <date>Mon, Jan 22, 2018 10:14 AM</date>
+   <nodelocation>928,40,1</nodelocation>
+   <nodesize>64,24</nodesize>
+   <diagstate>2,816,120,281,288,17</diagstate>
+   <function name="Cubic">
+    <parameters>(param1,param2)</parameters>
+    <title>Cubic</title>
+    <description>Defines a cubic spline basis for two inputs.</description>
+    <definition>((param1-1/2)^2-1/12)*((param2-1/2)^2-1/12)/4 - ((Abs(param2-param1)-1/2)^4-1/2*(Abs(param2-param1)-1/2)^2+7/240)/24 </definition>
+    <nodelocation>72,224,1</nodelocation>
+    <nodesize>48,16</nodesize>
+    <windstate>2,102,94,476,224</windstate>
+    <log>Cubic regression spline for parameters on [0,1].</log>
+   </function>
+   <function name="GAM">
+    <parameters>(input, output : Array[R]; knots: Optional=10 ; R : Index= Run)</parameters>
+    <title>GAM</title>
+    <description>This function contains the process for going from input and output to estimated output.
+
+First, values are set, such as the number of knots from the input, the number of trials for GCV (nTrials), the knot locations (xk), the input transformed to the interval [0,1] (x).
+
+We call the Cubic function to create the model matrix, which consists of matrices M and S.
+
+We find the model's prediction using the Regress function for each lambda value.
+
+We evaluate each model using the GCV function.
+
+We return the model with the best GCV statistic.</description>
+    <definition>/*set up variables and indices*/
+
+var q := knots;
+var n := Size(R);
+
+Var nTrials := 50;
+Index qIndex := Sequence(1,q);
+Index qIndex2 := qIndex;
+Index qrun := Sequence(1,n+q);
+Index qrun2 := qrun;
+Index q3 := Sequence(3,q);
+Index q32 := q3;
+var fract := @q3/(q-1);
+
+
+/*resize parameters to [0, 1]*/
+Var x := (input-Min(input,R))/(Max(input,R)-Min(input,R));
+/*set knots at quantiles*/
+Var xk := GetFract(x,fract,I:R);
+/*use spline function to make model and penalty matrices*/
+Var S := if qIndex&lt;=2 or qIndex2&lt;=2 then 0 
+    else Cubic( xk[q3=qIndex], xk[q3=qIndex2] );
+
+Var M := Concat( [1,x], Cubic(x, xk), ,q3, qIndex );
+
+ /*trial multiple penalty values (lambda)*/
+Index lambda := 1e-5 * 2^(0..nTrials-1);
+Var rS := Decompose(S*lambda + (@qIndex=@qIndex2)/10^50,qIndex,qIndex2);
+
+Var X1 := Concat(M,rS,R,qIndex2,qrun);
+Var model := Regress( X1, output, qIndex, qRun, R );
+Var trA := GCV(X1,qIndex, qRun, R);
+
+Var norm := Sum( (model[qRun=R] - output)^2, R );
+Var gcv := norm*n/((n-trA)^2);
+
+Var bestLambda := ArgMin(gcv,Lambda);
+model [ Lambda = bestLambda ]</definition>
+    <nodelocation>72,176,1</nodelocation>
+    <nodesize>48,16</nodesize>
+    <windstate>2,922,69,704,862</windstate>
+   </function>
+   <function name="Point_EVPPI">
+    <parameters>(inputs; output; knots: Optional=10)</parameters>
+    <title>Point_EVPPI</title>
+    <description>Calculates the variance of the output using samples from the function defined in 'Function_calculation'.
+
+Then calculates expected value of partial perfect information (EVPPI) for all parameters in the model independently using GAM regression.</description>
+    <definition>var original_variance := Variance(output);
+
+var regression_fit := GAM(inputs,output,knots);
+
+var net_benefit := (output-regression_fit)^2;
+
+var EVPPI := original_variance - Mean(net_benefit,Run);
+
+Index a := ['Var'];
+
+Concat(original_variance,EVPPI,a,all_parameters)</definition>
+    <nodelocation>128,40,1</nodelocation>
+    <nodesize>72,16</nodesize>
+    <windstate>2,11,435,525,513</windstate>
+   </function>
+   <function name="Decision_EVPPI">
+    <parameters>(inputs; output; knots: Optional=10)</parameters>
+    <title>Decision_EVPPI</title>
+    <description>Calculates net cost under uncertaintly (NCUU) and expected value of perfect information (EVPI) using samples in 'inputs' and 'output'. NCUU = expected cost of the optimal decision = - expected return for optimal decision.
+
+Then calculates expected value of partial perfect information (EVPPI) for all parameters in the model independently using GAM regression.
+
+NB:  RETURN / LOSS
+
+We can, equivalently, minimise the loss (or cost) or maximase a return (or utility). The loss = - the return. Therefore, choosing Min(cost) is the same as choosing Max(return).
+
+Similarly, &quot;NCUU - Min(regression_fit,id)&quot; calculates the reduction in loss. If the inputs had been defined as returns, this would be equivalent to &quot;Max(regression_fit,id) - Max(Mean(return,Run),id)&quot;
+
+Here we use a minimising function based on the assumption that the user provides a cost they wish to minimise. If the user is providing a return they wish to maximise, they can convert it into a loss by multiplying it by -1.</description>
+    <definition>var D := Size(output)/Max(Run);
+Index id := 1..D;
+output := Array(id,Run,output);
+
+var NCUU := Min(Mean(output,Run),id);
+var EVPI := NCUU - Mean(Min(output,id));
+var regression_fit := NULL;
+
+NCUU := NCUU - output[id=1];
+var output2 := output - output[id=1];
+
+FOR i[]:= 2..D DO (
+   regression_fit[id=i] := GAM(inputs,output2[id=i],knots);
+);
+regression_fit[id=1] := 0;
+
+var net_benefit := NCUU - Min(regression_fit,id);
+var EVPPI := Mean(net_benefit,Run);
+
+Index a := ['EVPI'];
+Concat(EVPI,EVPPI,a,all_parameters);
+
+</definition>
+    <nodelocation>128,88,1</nodelocation>
+    <nodesize>72,16</nodesize>
+    <windstate>2,592,235,853,704</windstate>
+   </function>
+   <function name="Regress">
+    <parameters>( X1 : Array[qRun,qIndex] ; output : Array[R] ; 
+qIndex, qRun : Index ; R : Index = Run)</parameters>
+    <title>Regress</title>
+    <description>Performs regression for the function GAM.
+
+This code is written for a Gaussian-distributed output with a linear link function.
+
+We provide infrastructure for extending this to e.g. Gamma-distributed outputs and/or log link functions, and we strongly recommend consulting Wood (2006) for correctly implementing different models.
+
+One must pay particular attention to (a) the weight, w, and (b) the derivative of the link function, deriv.</description>
+    <definition>Var link := 'Linear';
+Var family := 'Gaussian';
+
+Var w := Array(qRun,1);
+{For linear link and Gaussian outcome, the weight is 1}
+{For other model types, the optimisation step requires calculation of the diagonal matrix W (see documentation)}
+
+Var deriv := Array(R,1);
+{For linear link, the dervative of the link function is 1.}
+
+If (family = 'Gaussian') And ( link = 'Linear') Then (
+   Var c := Regression( output[R=qRun,defVal:0], X1, qRun, qIndex );
+   Sum( (c*X1)[qRun=R], qIndex )
+) Else (
+   var delta := 1/10000;
+   Var beta := qIndex=1;
+   Var norm := 0;
+   Var old_norm := 1;
+&#x09;
+   /*iteratively regress to find beta*/
+   WHILE Abs(norm-old_norm) &gt; delta*norm DO (
+      Var eta := Sum(X1*beta,qIndex)[qRun=R];
+      Var mu := eta;
+      {z = f'(mu)*(output-mu) + eta : for a linear link function, f'(mu)=1}
+      If (link='Log') Then (
+         mu := Exp(eta);
+         deriv := 1/mu;
+      );
+      If (family='Gamma') Then (w[qRun=R] := 1/deriv^2/mu^2);
+      If (family='Gaussian') Then (w[qRun=R] := 1/deriv^2);
+      Var z := Concat( deriv*(output-mu) + eta, 0, R, qIndex, qRun );
+      
+      beta := Regression(Sqrt(w)*z,Sqrt(w)*X1,qrun,qIndex);
+      
+      Var model := Sum(beta*X1,qIndex)[qRun=R];
+      old_norm := norm;
+      norm := Sum((output-model)^2,R);
+      model
+   );
+)</definition>
+    <nodelocation>184,176,1</nodelocation>
+    <nodesize>48,16</nodesize>
+    <nodeinfo>1,1,1,1,1,1,0,0,0,0,</nodeinfo>
+    <windstate>2,1186,200,603,623</windstate>
+   </function>
+   <function name="GCV">
+    <parameters>( X : Array[qIndex,qRun] ; qIndex,qRun,R : Index)</parameters>
+    <title>GCV</title>
+    <description>Generalised cross validation</description>
+    <definition>Index qIndex2 := qIndex;
+Var XX := Invert( MatrixMultiply(X,qIndex,qRun,X[qIndex=qIndex2],qRun,qIndex2 ), qIndex, qIndex2);
+Var XXX := MatrixMultiply(X[qRun=R],R,qIndex,XX,qIndex2,qIndex);
+Sum( XXX * X[qRun=R] , qIndex, R )</definition>
+    <nodelocation>184,224,1</nodelocation>
+    <nodesize>48,16</nodesize>
+   </function>
+  </module>
+ </model>
+</ana>
